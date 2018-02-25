@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  inbucket:
+    image: jhillyerd/inbucket
+    ports:
+      - "80:10080"
+    expose:
+      - "10025"
+    volumes:
+      - ./inbucket_config:/con/configuration
+    restart: unless-stopped
+  fauxmailer:
+    image: jhillyerd/fauxmailer
+    command: "fauxmailer -host inbucket:10025 -every 10s"
+    restart: unless-stopped
