@@ -1,0 +1,16 @@
+{
+  "ignition": { "version": "2.1.0" },
+  "storage": {
+    "files": [{
+      "filesystem": "root",
+      "path": "/opt/bin/docker-compose",
+      "mode": 493,
+      "contents": {
+        "source": "https://github.com/docker/compose/releases/download/1.19.0/docker-compose-Linux-x86_64",
+        "verification": {
+          "hash": "sha512-a95454b71966f9c28bc30c04320eea3b1471b5b077fa05661fa6d5d94e822d3b46649fd01190fe9fa16b3a53e1e67fd8a66561e5f7dfdd50d5a7cdbd641ab85e"
+        }
+      }
+    }]
+  }
+}
