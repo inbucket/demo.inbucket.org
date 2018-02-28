@@ -12,5 +12,7 @@ services:
     restart: unless-stopped
   fauxmailer:
     image: jhillyerd/fauxmailer
-    command: "fauxmailer -host inbucket:10025 -every 10s"
+    command: "fauxmailer -host inbucket:10025 -tofile /config/addrlist.txt -every 10s"
+    volumes:
+      - ./fauxmailer_config:/config
     restart: unless-stopped
