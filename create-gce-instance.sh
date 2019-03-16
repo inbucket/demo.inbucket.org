@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # create-gce-instance.sh <instance name>
 
 primary="inbucket-demo-1"
