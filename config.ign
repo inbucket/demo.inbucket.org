@@ -17,7 +17,7 @@
       "path": "/opt/bin/bootstrap.sh",
       "mode": 493,
       "contents": {
-        "source": "https://raw.githubusercontent.com/jhillyerd/demo.inbucket.org/master/bootstrap.sh"
+        "source": "https://raw.githubusercontent.com/inbucket/demo.inbucket.org/master/bootstrap.sh"
       }
     }]
   },

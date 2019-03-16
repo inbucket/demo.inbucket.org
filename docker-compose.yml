@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   inbucket:
-    image: jhillyerd/inbucket
+    image: inbucket/inbucket
     environment:
       INBUCKET_STORAGE_RETENTIONPERIOD: "4h"
     ports:
@@ -13,7 +13,7 @@ services:
       - ./inbucket_config:/config
     restart: unless-stopped
   fauxmailer:
-    image: jhillyerd/fauxmailer
+    image: inbucket/fauxmailer
     command: "fauxmailer -host inbucket:2500 -tofile /config/addrlist.txt -every 10s"
     volumes:
       - ./fauxmailer_config:/config

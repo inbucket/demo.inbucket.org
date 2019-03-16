@@ -1,7 +1,7 @@
 #!/bin/sh
 # bootstrap.sh
 
-REPO="https://github.com/jhillyerd/demo.inbucket.org"
+REPO="https://github.com/inbucket/demo.inbucket.org"
 WORK_DIR="/etc/docker/compose"
 TARGET="inbucket"
 
