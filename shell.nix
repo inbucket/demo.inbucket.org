@@ -5,5 +5,6 @@ stdenv.mkDerivation rec {
   buildInputs = [
     docker_compose
     google-cloud-sdk
+    terraform
   ];
 }
