@@ -1,0 +1,38 @@
+- name: copy configuration to /etc
+  copy:
+    dest: "/etc"
+    src: "{{ item }}"
+    directory_mode: 0755
+    mode: 0644
+  loop:
+    - inbucket_config
+    - fauxmailer_config
+
+- name: docker inbucket network
+  community.general.docker_network:
+    name: inbucket_net
+
+- name: inbucket container
+  community.general.docker_container:
+    name: inbucket
+    image: "inbucket/inbucket:latest"
+    env:
+      INBUCKET_STORAGE_RETENTIONPERIOD: "4h"
+    published_ports:
+      - 80:9000
+    network_mode: inbucket_net
+    volumes:
+      - "/etc/inbucket_config:/config"
+    restart_policy: "unless-stopped"
+    container_default_behavior: no_defaults
+
+- name: fauxmailer container
+  community.general.docker_container:
+    name: fauxmailer
+    image: "inbucket/fauxmailer:latest"
+    command: "fauxmailer -host inbucket:2500 -tofile /config/addrlist.txt -every 10s"
+    network_mode: inbucket_net
+    volumes:
+      - "/etc/fauxmailer_config:/config"
+    restart_policy: "unless-stopped"
+    container_default_behavior: no_defaults

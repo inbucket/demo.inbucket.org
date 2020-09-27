@@ -1,0 +1,16 @@
+- name: gcp infrastructure
+  hosts: localhost
+  gather_facts: no
+  roles: [ gcp ]
+
+- name: docker hosts
+  hosts: docker
+  roles:
+    - role: docker
+      become: yes
+
+- name: inbucket demo
+  hosts: inbucket
+  roles:
+    - role: inbucket
+      become: yes

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+export GCP_AUTH_KIND=serviceaccount
+export GCP_SERVICE_ACCOUNT_FILE=./gcp-credentials.json
+
+ansible-playbook --inventory production.yml site.yml

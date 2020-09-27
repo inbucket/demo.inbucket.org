@@ -1,0 +1,35 @@
+- name: install docker pre-requisites
+  apt:
+    name: "{{ packages }}"
+    state: latest
+    cache_valid_time: 3600
+  vars:
+    packages:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+
+- name: add docker apt key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: add docker apt repo
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian buster stable
+    mode: "600"
+    state: present
+
+- name: install docker-ce
+  apt:
+    name: docker-ce
+    update_cache: yes
+    state: latest
+
+- name: install docker python module
+  pip:
+    name: docker

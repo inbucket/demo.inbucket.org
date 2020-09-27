@@ -1,0 +1,54 @@
+- name: firewall for tcp/80
+  gcp_compute_firewall:
+    name: tcp-http-server
+    allowed:
+      - ip_protocol: tcp
+        ports: [ "80" ]
+    target_tags:
+      - http-server
+    project: "{{ gcp_project }}"
+
+- name: allocate external ip
+  gcp_compute_address:
+    name: inbucket-demo-address
+    project: "{{ gcp_project }}"
+    region: "{{ gcp_region }}"
+    scopes:
+      - https://www.googleapis.com/auth/compute
+  register: address
+
+- name: provision compute
+  gcp_compute_instance:
+    name: inbucket-demo-vm
+    machine_type: e2-micro
+    disks:
+      - auto_delete: true
+        boot: true
+        initialize_params:
+          source_image: "projects/debian-cloud/global/images/family/debian-10"
+    network_interfaces:
+      - network: null
+        access_configs:
+          - name: "External NAT"
+            nat_ip: "{{ address }}"
+            type: ONE_TO_ONE_NAT
+    tags:
+      items:
+        - http-server
+    project: "{{ gcp_project }}"
+    zone: "{{ gcp_zone }}"
+    scopes:
+      - https://www.googleapis.com/auth/compute
+  register: instance
+
+- name: wait for instance to be live
+  wait_for:
+    host: "{{ address.address }}"
+    port: 22
+    delay: 10
+    timeout: 120
+
+- name: add instance to managed group
+  add_host:
+    hostname: "{{ address.address }}"
+    groupname: inbucket

@@ -1,21 +1,24 @@
 # demo.inbucket.org
 
-GCP CoreOS+ignition config that powers http://demo.inbucket.org
+Ansible config that powers http://demo.inbucket.org
 
 ## Usage
 
-1. Install [gcloud compute] CLI locally on Linux or OS X
-2. Run `gcloud init`
-3. *Optional:* Set a default zone
-4. `git clone https://github.com/inbucket/demo.inbucket.org`
-5. `cd demo.inbucket.org`
-6. Run `./create-gce-instance.sh inbucket-vm`
-7. Use [VM instances] to find the External IP for `inbucket-vm`
-
-You can also use Google Cloud Shell instead of setting up gcloud locally, just
-start at step 4 above.
+1. Install ansible and dependencies (see `shell.nix`)
+2. `ansible-galaxy collection install community.general`
+3. `git clone https://github.com/inbucket/demo.inbucket.org`
+4. `cd demo.inbucket.org`
+5. Create a GCP project, and enable the [compute engine API]
+6. Add your SSH key to the project to permit ansible VM access
+7. Create a [service account] with Compute Admin role
+8. Place JSON credentials for the account into `gcp-credentials.json`
+9. Update `production.yml` to reflect your desired GCP project ID, region,
+   and zone.
+10. Run `./apply-production`
+11. Use [VM instances] to find the External IP for `inbucket-demo-vm`
 
 See also: http://inbucket.org/
 
-[gcloud compute]: https://cloud.google.com/compute/docs/gcloud-compute/
-[VM instances]:   https://console.cloud.google.com/compute/instances
+[compute engine API]: https://console.cloud.google.com/apis/library/compute.googleapis.com 
+[service account]:    https://console.cloud.google.com/iam-admin/serviceaccounts/create
+[VM instances]:       https://console.cloud.google.com/compute/instances
