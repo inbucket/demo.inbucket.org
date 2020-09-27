@@ -1,0 +1,14 @@
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+      gcp_project: inbucket-demo
+      gcp_region: us-west1
+      gcp_zone: us-west1-b
+  children:
+    # Hosts running docker
+    docker:
+      children:
+        inbucket:
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
