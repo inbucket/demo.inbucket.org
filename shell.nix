@@ -1,13 +1,13 @@
-with import <nixpkgs> {};
-stdenv.mkDerivation rec {
-  name = "env";
-  env = buildEnv { name = name; paths = buildInputs; };
-  buildInputs = [
-    ansible
-    ansible-lint
-    google-cloud-sdk
-    python38Packages.docker-py
-    python38Packages.google_auth
-    python38Packages.requests
-  ];
+{ pkgs ? import <nixpkgs> { } }:
+pkgs.mkShell {
+  buildInputs =
+    let
+      python-env = pkgs.python310.withPackages (p: [ p.google-auth ]);
+    in
+    with pkgs; [
+      ansible
+      ansible-lint
+      google-cloud-sdk
+      python-env
+    ];
 }
