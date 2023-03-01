@@ -20,7 +20,7 @@
 
 - name: add docker apt repo
   apt_repository:
-    repo: deb https://download.docker.com/linux/debian buster stable
+    repo: deb https://download.docker.com/linux/debian bullseye stable
     mode: "600"
     state: present
 

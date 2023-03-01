@@ -15,7 +15,7 @@
 - name: inbucket container
   community.general.docker_container:
     name: inbucket
-    image: "inbucket/inbucket:latest"
+    image: "inbucket/inbucket:3.1.0-beta1"
     env:
       INBUCKET_STORAGE_RETENTIONPERIOD: "4h"
     published_ports:
@@ -29,7 +29,7 @@
 - name: fauxmailer container
   community.general.docker_container:
     name: fauxmailer
-    image: "inbucket/fauxmailer:latest"
+    image: "inbucket/fauxmailer:0.4.1"
     command: "fauxmailer -host inbucket:2500 -tofile /config/addrlist.txt -every 10s"
     network_mode: inbucket_net
     volumes:

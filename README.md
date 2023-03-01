@@ -11,11 +11,12 @@ Ansible config that powers http://demo.inbucket.org
 5. Create a GCP project, and enable the [compute engine API]
 6. Add your SSH key to the project to permit ansible VM access
 7. Create a [service account] with Compute Admin role
-8. Place JSON credentials for the account into `gcp-credentials.json`
-9. Update `production.yml` to reflect your desired GCP project ID, region,
+8. Create & download JSON credentials from Service Account `keys` tab
+9. Place JSON credentials for the account into `gcp-credentials.json`
+10. Update `production.yml` to reflect your desired GCP project ID, region,
    and zone.
-10. Run `./apply-production`
-11. Use [VM instances] to find the External IP for `inbucket-demo-vm`
+11. Run `./apply-production`
+12. Use [VM instances] to find the External IP for `inbucket-demo-vm`
 
 See also: http://inbucket.org/
 
