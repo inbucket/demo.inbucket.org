@@ -9,9 +9,8 @@
       - ca-certificates
       - curl
       - software-properties-common
-      - python3-pip
-      - virtualenv
       - python3-setuptools
+      - python3-docker
 
 - name: add docker apt key
   apt_key:
@@ -20,7 +19,7 @@
 
 - name: add docker apt repo
   apt_repository:
-    repo: deb https://download.docker.com/linux/debian bullseye stable
+    repo: deb https://download.docker.com/linux/debian bookworm stable
     mode: "600"
     state: present
 
@@ -29,7 +28,3 @@
     name: docker-ce
     update_cache: yes
     state: latest
-
-- name: install docker python module
-  pip:
-    name: docker
