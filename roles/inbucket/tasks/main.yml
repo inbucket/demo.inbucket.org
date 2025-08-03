@@ -15,7 +15,7 @@
 - name: inbucket container
   community.general.docker_container:
     name: inbucket
-    image: "inbucket/inbucket:3.1.0-beta2"
+    image: "inbucket/inbucket:3.1.0"
     env:
       INBUCKET_STORAGE_RETENTIONPERIOD: "4h"
     published_ports:
